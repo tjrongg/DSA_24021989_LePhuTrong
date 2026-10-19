@@ -77,6 +77,7 @@ void printReverse()
     }
     cout << endl;
 }
+#ifndef LIST_ARRAY_NO_MAIN
 int main()
 {
     insertLast(10);
@@ -116,3 +117,4 @@ int main()
 
    
 }
+#endif
