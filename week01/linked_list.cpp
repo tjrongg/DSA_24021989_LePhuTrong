@@ -129,7 +129,7 @@ void printReverse(Node* head)
     printReverse(head->next);
     cout << head->data << " ";
 }
-
+#ifndef LIST_ARRAY_NO_MAIN
 int main() {
     Node* head = nullptr; 
     cout<<"Tao chuoi node"<<endl;
@@ -158,6 +158,8 @@ int main() {
 
     return 0;
 }
+
+#endif
 
 
 
