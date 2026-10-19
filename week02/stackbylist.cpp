@@ -32,6 +32,9 @@ struct Stack {
 
         return arr[n - 1];
     }
+int size() {
+    return n;
+}
 
     // Kiem tra Stack rong
     bool isEmpty() {
