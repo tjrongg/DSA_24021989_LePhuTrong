@@ -2,137 +2,207 @@
 #include <iostream>
 using namespace std;
 
-#ifndef LIST_ARRAY_H
-#define LIST_ARRAY_H
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
-const int MAX_SIZE = 100;
-int arr[MAX_SIZE];
-int n = 0;
+struct Node {
+    int data;
+    Node* next;
+};
 
-// Truy cap phan tu
-void getIdArr(int index) {
-    if (index < 0 || index >= n) {
-        cout << "Vi tri khong hop le!" << endl;
-        return;
-    }
-    cout << arr[index] << endl;
-}
-
-// Chen cuoi
-void insertLast(int x) {
-    if (n >= MAX_SIZE) {
-        cout << "List da day!" << endl;
-        return;
-    }
-    arr[n] = x;
-    n++;
+// Tao node
+Node* createNode(int x) {
+    Node* p = new Node;
+    p->data = x;
+    p->next = nullptr;
+    return p;
 }
 
 // Chen dau
-void insertFirst(int x) {
-    if (n >= MAX_SIZE) {
-        cout << "List da day!" << endl;
+void insertFirst(Node*& head, int x) {
+    Node* p = createNode(x);
+    p->next = head;
+    head = p;
+}
+
+// Chen cuoi
+void insertLast(Node*& head, int x) {
+    Node* p = createNode(x);
+
+    if (head == nullptr) {
+        head = p;
         return;
     }
-    for (int i = n; i > 0; i--) {
-        arr[i] = arr[i - 1];
+
+    Node* cur = head;
+    while (cur->next != nullptr) {
+        cur = cur->next;
     }
-    arr[0] = x;
-    n++;
+    cur->next = p;
 }
 
 // Chen tai vi tri index
-void insertValue(int x, int index) {
-    if (index < 0 || index > n || n >= MAX_SIZE) {
+void insertValue(Node*& head, int x, int index) {
+    if (index < 0) {
         cout << "Vi tri khong hop le!" << endl;
         return;
     }
-    for (int i = n; i > index; i--) {
-        arr[i] = arr[i - 1];
+
+    if (index == 0) {
+        insertFirst(head, x);
+        return;
     }
-    arr[index] = x;
-    n++;
+
+    Node* cur = head;
+
+    for (int i = 0; i < index - 1 && cur != nullptr; i++) {
+        cur = cur->next;
+    }
+
+    if (cur == nullptr) {
+        cout << "Vi tri khong hop le!" << endl;
+        return;
+    }
+
+    Node* p = createNode(x);
+    p->next = cur->next;
+    cur->next = p;
 }
 
 // Xoa dau
-void deleteFirst() {
-    if (n == 0) {
+void deleteFirst(Node*& head) {
+    if (head == nullptr) {
         cout << "List rong!" << endl;
         return;
     }
-    for (int i = 0; i < n - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
-    n--;
+
+    Node* temp = head;
+    head = head->next;
+    delete temp;
 }
 
 // Xoa cuoi
-void deleteLast() {
-    if (n == 0) {
+void deleteLast(Node*& head) {
+    if (head == nullptr) {
         cout << "List rong!" << endl;
         return;
     }
-    n--;
+
+    if (head->next == nullptr) {
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node* cur = head;
+    while (cur->next->next != nullptr) {
+        cur = cur->next;
+    }
+
+    delete cur->next;
+    cur->next = nullptr;
 }
 
 // Xoa tai vi tri index
-void deleteIdArr(int index) {
-    if (index < 0 || index >= n) {
+void deleteValue(Node*& head, int index) {
+    if (index < 0 || head == nullptr) {
         cout << "Vi tri khong hop le!" << endl;
         return;
     }
-    for (int i = index; i < n - 1; i++) {
-        arr[i] = arr[i + 1];
+
+    if (index == 0) {
+        deleteFirst(head);
+        return;
     }
-    n--;
+
+    Node* cur = head;
+
+    for (int i = 0; i < index - 1 && cur != nullptr; i++) {
+        cur = cur->next;
+    }
+
+    if (cur == nullptr || cur->next == nullptr) {
+        cout << "Vi tri khong hop le!" << endl;
+        return;
+    }
+
+    Node* temp = cur->next;
+    cur->next = temp->next;
+    delete temp;
+}
+
+// Tim vi tri cua x
+int indexOf(Node* head, int x) {
+    int index = 0;
+
+    while (head != nullptr) {
+        if (head->data == x) {
+            return index;
+        }
+        head = head->next;
+        index++;
+    }
+
+    return -1;
 }
 
 // Duyet xuoi
-void printForward() {
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout << head->data << " ";
+        head = head->next;
     }
     cout << endl;
 }
 
 // Duyet nguoc
-void printReverse() {
-    for (int i = n - 1; i >= 0; i--) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
+void printReverse(Node* head) {
+    if (head == nullptr) return;
+
+    printReverse(head->next);
+    cout << head->data << " ";
 }
 
 #endif
 
-#ifndef LIST_ARRAY_NO_MAIN
+#ifndef LINKED_LIST_NO_MAIN
 int main() {
-    insertLast(10);
-    insertLast(20);
-    insertLast(30);
+    Node* head = nullptr;
+
+    insertFirst(head, 10);
+    insertLast(head, 20);
+    insertLast(head, 30);
+    insertLast(head, 40);
 
     cout << "List ban dau: ";
-    printForward();
+    printList(head);
 
-    insertFirst(5);
-    cout << "Sau khi chen dau: ";
-    printForward();
+    insertValue(head, 15, 1);
+    cout << "Sau khi chen vi tri 1: ";
+    printList(head);
 
-    insertValue(15, 2);
-    cout << "Sau khi chen vi tri 2: ";
-    printForward();
-
-    deleteFirst();
+    deleteFirst(head);
     cout << "Sau khi xoa dau: ";
-    printForward();
+    printList(head);
 
-    deleteLast();
+    deleteLast(head);
     cout << "Sau khi xoa cuoi: ";
-    printForward();
+    printList(head);
 
-    deleteIdArr(1);
+    deleteValue(head, 1);
     cout << "Sau khi xoa vi tri 1: ";
-    printForward();
+    printList(head);
+
+    cout << "Duyet nguoc: ";
+    printReverse(head);
+    cout << endl;
+
+    // Giai phong bo nho
+    while (head != nullptr) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+    }
 
     return 0;
 }
