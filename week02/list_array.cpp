@@ -1,120 +1,139 @@
+
 #include <iostream>
 using namespace std;
 
-int arr[100];
-int n=0;
-//truycap
+#ifndef LIST_ARRAY_H
+#define LIST_ARRAY_H
+
+const int MAX_SIZE = 100;
+int arr[MAX_SIZE];
+int n = 0;
+
+// Truy cap phan tu
 void getIdArr(int index) {
+    if (index < 0 || index >= n) {
+        cout << "Vi tri khong hop le!" << endl;
+        return;
+    }
     cout << arr[index] << endl;
 }
-//chenphantucuoi
-void insertLast(int x)
-{
+
+// Chen cuoi
+void insertLast(int x) {
+    if (n >= MAX_SIZE) {
+        cout << "List da day!" << endl;
+        return;
+    }
     arr[n] = x;
     n++;
 }
 
-//chenphantudau
-void insertFirst(int x)
-{
-    for(int i=n; i>0; i--)
-    {
-        arr[i]=arr[i-1];
+// Chen dau
+void insertFirst(int x) {
+    if (n >= MAX_SIZE) {
+        cout << "List da day!" << endl;
+        return;
     }
-    arr[0]=x;
-    n++;
-}
-//chenphantuthuk
-void insertValue(int x, int index)
-{
-    for(int i=n;i>index;i--)
-    {
-        arr[i]=arr[i-1];
+    for (int i = n; i > 0; i--) {
+        arr[i] = arr[i - 1];
     }
-    arr[index]=x;
+    arr[0] = x;
     n++;
 }
 
-//xoadau
-void deleteFirst() 
-{
+// Chen tai vi tri index
+void insertValue(int x, int index) {
+    if (index < 0 || index > n || n >= MAX_SIZE) {
+        cout << "Vi tri khong hop le!" << endl;
+        return;
+    }
+    for (int i = n; i > index; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[index] = x;
+    n++;
+}
+
+// Xoa dau
+void deleteFirst() {
+    if (n == 0) {
+        cout << "List rong!" << endl;
+        return;
+    }
     for (int i = 0; i < n - 1; i++) {
         arr[i] = arr[i + 1];
     }
     n--;
 }
 
-//xoacuoi
-void deleteLast() 
-{
+// Xoa cuoi
+void deleteLast() {
+    if (n == 0) {
+        cout << "List rong!" << endl;
+        return;
+    }
     n--;
 }
 
-//xoaphantuthuk
-void deleteIdArr(int index) 
-{
+// Xoa tai vi tri index
+void deleteIdArr(int index) {
+    if (index < 0 || index >= n) {
+        cout << "Vi tri khong hop le!" << endl;
+        return;
+    }
     for (int i = index; i < n - 1; i++) {
         arr[i] = arr[i + 1];
     }
-
     n--;
 }
 
-//duyetxuoi
-void printForward() 
-{
+// Duyet xuoi
+void printForward() {
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
     cout << endl;
 }
 
-//duyetnguoc
-void printReverse() 
-{
+// Duyet nguoc
+void printReverse() {
     for (int i = n - 1; i >= 0; i--) {
         cout << arr[i] << " ";
     }
     cout << endl;
 }
+
+#endif
+
 #ifndef LIST_ARRAY_NO_MAIN
-int main()
-{
+int main() {
     insertLast(10);
     insertLast(20);
     insertLast(30);
 
-    cout<<"In vi tri dau:"<<endl;
-    getIdArr(0);
-    cout<<"In xuôi mảng:"<<endl;
+    cout << "List ban dau: ";
     printForward();
-
-    cout<<"Chen 5 vao vi tri đầu:"<<endl;
 
     insertFirst(5);
-
+    cout << "Sau khi chen dau: ";
     printForward();
-    cout<<"Chen 15 vao vi tri thu 3:"<<endl;
 
     insertValue(15, 2);
-
+    cout << "Sau khi chen vi tri 2: ";
     printForward();
-    cout<<"Xoa vi tri dau:"<<endl;
+
     deleteFirst();
-
+    cout << "Sau khi xoa dau: ";
     printForward();
 
-    cout<<"Xoa vi tri cuôi:"<<endl;
     deleteLast();
-
+    cout << "Sau khi xoa cuoi: ";
     printForward();
-    cout<<"Xoa vi tri thu 2:"<<endl;
+
     deleteIdArr(1);
-
+    cout << "Sau khi xoa vi tri 1: ";
     printForward();
-    cout<<"In nguoc mang"<<endl;
-    printReverse();
 
-   
+    return 0;
 }
 #endif
