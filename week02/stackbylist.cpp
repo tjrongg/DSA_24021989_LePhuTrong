@@ -1,48 +1,56 @@
 
+#ifndef STACKBYLIST_H
+#define STACKBYLIST_H
+
 #define LIST_ARRAY_NO_MAIN
 #include "list_array.cpp"
 
-// Them phan tu vao dinh Stack
-void push(int x) {
-    insertLast(x);
-}
-
-// Xoa phan tu o dinh Stack
-void pop() {
-    if (n == 0) {
-        cout << "Stack rong!" << endl;
-        return;
+struct Stack {
+    // Them phan tu vao dinh Stack
+    void push(int x) {
+        insertLast(x);
     }
 
-    deleteLast();
-}
+    // Lay va xoa dinh Stack
+    int pop() {
+        if (n == 0) {
+            cout << "Stack rong!" << endl;
+            return -1;
+        }
 
-// Xem phan tu o dinh Stack
-void top() {
-    if (n == 0) {
-        cout << "Stack rong!" << endl;
-        return;
+        int x = arr[n - 1];
+        deleteLast();
+        return x;
     }
 
-    getIdArr(n - 1);
-}
+    // Xem dinh Stack
+    int top() {
+        if (n == 0) {
+            cout << "Stack rong!" << endl;
+            return -1;
+        }
+
+        return arr[n - 1];
+    }
+
+    // Kiem tra Stack rong
+    bool isEmpty() {
+        return n == 0;
+    }
+};
+
+#endif
 
 int main() {
-    push(10);
-    push(20);
-    push(30);
+    Stack s;
 
-    cout << "Stack ban dau: ";
-    printForward();
+    s.push(10);
+    s.push(20);
+    s.push(30);
 
-    cout << "Dinh Stack: ";
-    top();
-
-    pop();
-
-    cout << "Sau khi pop: ";
-    printForward();
+    cout << "Top: " << s.top() << endl;
+    cout << "Pop: " << s.pop() << endl;
+    cout << "Top sau pop: " << s.top() << endl;
 
     return 0;
 }
-
