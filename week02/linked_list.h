@@ -188,37 +188,4 @@ struct LinkedList {
 
 #endif
 
-#ifndef LINKED_LIST_NO_MAIN
-int main() {
-    LinkedList list;
 
-    list.insertFirst(10);
-    list.insertLast(20);
-    list.insertLast(30);
-    list.insertLast(40);
-
-    cout << "List ban dau: ";
-    list.printList();
-
-    list.insertValue(15, 1);
-    cout << "Sau khi chen vi tri 1: ";
-    list.printList();
-
-    list.deleteFirst();
-    cout << "Sau khi xoa dau: ";
-    list.printList();
-
-    list.deleteLast();
-    cout << "Sau khi xoa cuoi: ";
-    list.printList();
-
-    list.deleteValue(1);
-    cout << "Sau khi xoa vi tri 1: ";
-    list.printList();
-
-    cout << "Duyet nguoc: ";
-    list.printReverse();
-
-    return 0;
-}
-#endif
