@@ -2,7 +2,7 @@
 #define STACKBYLINKEDLIST_H
 
 
-#include "linked_list.cpp"
+#include "linked_list.h"
 
 struct Stack {
     LinkedList list; // Moi Stack so huu 1 LinkedList rieng
