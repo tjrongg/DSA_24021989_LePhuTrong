@@ -1,7 +1,7 @@
 #ifndef STACKBYLIST_H
 #define STACKBYLIST_H
 
-#define LIST_ARRAY_NO_MAIN
+
 #include "list_array.h"
 
 struct Stack {
