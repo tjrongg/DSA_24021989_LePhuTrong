@@ -1,7 +1,7 @@
 #ifndef QUEUEBYLINKEDLIST_H
 #define QUEUEBYLINKEDLIST_H
 
-#define LINKED_LIST_NO_MAIN
+
 #include "linked_list.h"
 
 struct Queue {
