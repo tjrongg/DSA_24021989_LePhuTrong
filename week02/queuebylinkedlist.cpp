@@ -5,16 +5,23 @@
 #include "linked_list.h"
 
 struct Queue {
-    LinkedList list; // Moi Queue so huu 1 LinkedList rieng
+    LinkedList list;
+    Node* tail = nullptr; // Con tro luu vi tri cuoi hang doi
     int count = 0;
 
-    // Them vao cuoi Queue
+    // Them vao cuoi Queue - O(1)
     void enqueue(int x) {
-        list.insertLast(x);
+        Node* p = list.createNode(x);
+        if (isEmpty()) {
+            list.head = tail = p;
+        } else {
+            tail->next = p;
+            tail = p;
+        }
         count++;
     }
 
-    // Lay va xoa phan tu dau Queue
+    // Lay va xoa phan tu dau Queue - O(1)
     int dequeue() {
         if (isEmpty()) {
             cout << "Queue rong!" << endl;
@@ -24,8 +31,14 @@ struct Queue {
         int x = list.head->data;
         list.deleteFirst();
         count--;
+
+        // Neu xoa xong ma Queue rong thi reset luon tail
+        if (list.head == nullptr) {
+            tail = nullptr;
+        }
         return x;
     }
+};
 
     // Xem phan tu dau Queue
     int front() {
