@@ -1,7 +1,7 @@
 #ifndef STACKBYLINKEDLIST_H
 #define STACKBYLINKEDLIST_H
 
-#define LINKED_LIST_NO_MAIN
+
 #include "linked_list.cpp"
 
 struct Stack {
