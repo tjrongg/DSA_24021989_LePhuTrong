@@ -2,7 +2,7 @@
 #define STACKBYLIST_H
 
 #define LIST_ARRAY_NO_MAIN
-#include "list_array.cpp"
+#include "list_array.h"
 
 struct Stack {
     List list; // Moi Stack so huu 1 List rieng biet
