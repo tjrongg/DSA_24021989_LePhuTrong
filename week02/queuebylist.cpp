@@ -1,7 +1,7 @@
 #ifndef QUEUEBYLIST_H
 #define QUEUEBYLIST_H
 
-#define LIST_ARRAY_NO_MAIN
+
 #include "list_array.h"
 
 struct Queue {
