@@ -1,4 +1,3 @@
-
 #ifndef STACKBYLINKEDLIST_H
 #define STACKBYLINKEDLIST_H
 
@@ -6,63 +5,55 @@
 #include "linked_list.cpp"
 
 struct Stack {
-    Node* head;
-    int count;
+    LinkedList list; // Moi Stack so huu 1 LinkedList rieng
+    int count = 0;
 
-    Stack() {
-        head = nullptr;
-        count = 0;
-    }
-
+    // Them vao dinh Stack (chen dau danh sach - O(1))
     void push(int x) {
-        insertFirst(head, x);
+        list.insertFirst(x);
         count++;
     }
 
+    // Lay va xoa dinh Stack (xoa dau danh sach - O(1))
     int pop() {
-        if (head == nullptr) {
+        if (isEmpty()) {
             cout << "Stack rong!" << endl;
             return -1;
         }
-
-        int x = head->data;
-        deleteFirst(head);
+        int x = list.head->data;
+        list.deleteFirst();
         count--;
         return x;
     }
 
+    // Xem dinh Stack
     int top() {
-        if (head == nullptr) {
+        if (isEmpty()) {
             cout << "Stack rong!" << endl;
             return -1;
         }
-
-        return head->data;
+        return list.head->data;
     }
 
+    // Kiem tra Stack rong
     bool isEmpty() {
-        return head == nullptr;
+        return list.head == nullptr;
     }
 
+    // Kich thuoc Stack
     int size() {
         return count;
     }
 
+    // In Stack (tu dinh xuong day)
     void print() {
-        printList(head);
+        list.printList();
     }
 
+    // Xoa toan bo Stack
     void clear() {
-        while (head != nullptr) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
-        }
+        list.clear();
         count = 0;
-    }
-
-    ~Stack() {
-        clear();
     }
 };
 
@@ -84,6 +75,7 @@ int main() {
     cout << "Stack sau pop: ";
     s.print();
 
+    cout << "Size hien tai: " << s.size() << endl;
     cout << "Stack rong? " << s.isEmpty() << endl;
 
     return 0;
