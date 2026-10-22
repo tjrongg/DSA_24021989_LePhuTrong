@@ -2,7 +2,7 @@
 #define QUEUEBYLINKEDLIST_H
 
 #define LINKED_LIST_NO_MAIN
-#include "linked_list.cpp"
+#include "linked_list.h"
 
 struct Queue {
     LinkedList list; // Moi Queue so huu 1 LinkedList rieng
