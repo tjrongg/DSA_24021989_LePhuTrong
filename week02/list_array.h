@@ -113,37 +113,4 @@ struct List {
 
 #endif
 
-#ifndef LIST_ARRAY_NO_MAIN
-int main() {
-    List myList;
 
-    myList.insertLast(10);
-    myList.insertLast(20);
-    myList.insertLast(30);
-
-    cout << "List ban dau: ";
-    myList.printForward();
-
-    myList.insertFirst(5);
-    cout << "Sau khi chen dau: ";
-    myList.printForward();
-
-    myList.insertValue(15, 2);
-    cout << "Sau khi chen vi tri 2: ";
-    myList.printForward();
-
-    myList.deleteFirst();
-    cout << "Sau khi xoa dau: ";
-    myList.printForward();
-
-    myList.deleteLast();
-    cout << "Sau khi xoa cuoi: ";
-    myList.printForward();
-
-    myList.deleteIdArr(1);
-    cout << "Sau khi xoa vi tri 1: ";
-    myList.printForward();
-
-    return 0;
-}
-#endif
