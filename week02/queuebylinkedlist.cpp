@@ -1,4 +1,3 @@
-
 #ifndef QUEUEBYLINKEDLIST_H
 #define QUEUEBYLINKEDLIST_H
 
@@ -6,48 +5,41 @@
 #include "linked_list.cpp"
 
 struct Queue {
-    Node* head;
-    int count;
-
-    // Khoi tao Queue rong
-    Queue() {
-        head = nullptr;
-        count = 0;
-    }
+    LinkedList list; // Moi Queue so huu 1 LinkedList rieng
+    int count = 0;
 
     // Them vao cuoi Queue
     void enqueue(int x) {
-        insertLast(head, x);
+        list.insertLast(x);
         count++;
     }
 
     // Lay va xoa phan tu dau Queue
     int dequeue() {
-        if (head == nullptr) {
+        if (isEmpty()) {
             cout << "Queue rong!" << endl;
             return -1;
         }
 
-        int x = head->data;
-        deleteFirst(head);
+        int x = list.head->data;
+        list.deleteFirst();
         count--;
-
         return x;
     }
 
     // Xem phan tu dau Queue
     int front() {
-        if (head == nullptr) {
+        if (isEmpty()) {
             cout << "Queue rong!" << endl;
             return -1;
         }
 
-        return head->data;
+        return list.head->data;
     }
 
     // Kiem tra Queue rong
     bool isEmpty() {
-        return head == nullptr;
+        return list.head == nullptr;
     }
 
     // Tra ve so phan tu
@@ -57,22 +49,13 @@ struct Queue {
 
     // In Queue
     void print() {
-        printList(head);
+        list.printList();
     }
 
     // Giai phong bo nho
     void clear() {
-        while (head != nullptr) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
-        }
-
+        list.clear();
         count = 0;
-    }
-
-    ~Queue() {
-        clear();
     }
 };
 
