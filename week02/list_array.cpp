@@ -9,7 +9,7 @@ const int MAX_SIZE = 100;
 struct List {
     int arr[MAX_SIZE];
     int n = 0;
-
+};
     // Truy cap phan tu (in ra man hinh)
     void getIdArr(int index) {
         if (index < 0 || index >= n) {
