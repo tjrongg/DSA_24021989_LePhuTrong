@@ -1,4 +1,3 @@
-
 #ifndef STACKBYLIST_H
 #define STACKBYLIST_H
 
@@ -6,39 +5,41 @@
 #include "list_array.cpp"
 
 struct Stack {
+    List list; // Moi Stack so huu 1 List rieng biet
+
     // Them phan tu vao dinh Stack
     void push(int x) {
-        insertLast(x);
+        list.insertLast(x);
     }
 
     // Lay va xoa dinh Stack
     int pop() {
-        if (n == 0) {
+        if (isEmpty()) {
             cout << "Stack rong!" << endl;
             return -1;
         }
-
-        int x = arr[n - 1];
-        deleteLast();
+        int x = list.getValue(list.n - 1);
+        list.deleteLast();
         return x;
     }
 
     // Xem dinh Stack
     int top() {
-        if (n == 0) {
+        if (isEmpty()) {
             cout << "Stack rong!" << endl;
             return -1;
         }
-
-        return arr[n - 1];
+        return list.getValue(list.n - 1);
     }
-int size() {
-    return n;
-}
+
+    // Lay kich thuoc Stack
+    int size() {
+        return list.n;
+    }
 
     // Kiem tra Stack rong
     bool isEmpty() {
-        return n == 0;
+        return list.n == 0;
     }
 };
 
@@ -51,6 +52,7 @@ int main() {
     s.push(20);
     s.push(30);
 
+    cout << "Size hien tai: " << s.size() << endl;
     cout << "Top: " << s.top() << endl;
     cout << "Pop: " << s.pop() << endl;
     cout << "Top sau pop: " << s.top() << endl;
