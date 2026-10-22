@@ -1,4 +1,3 @@
-
 #ifndef QUEUEBYLIST_H
 #define QUEUEBYLIST_H
 
@@ -6,46 +5,48 @@
 #include "list_array.cpp"
 
 struct Queue {
+    List list; // Moi Queue so huu 1 List rieng biet
+
     // Them vao cuoi Queue
     void enqueue(int x) {
-        insertLast(x);
+        list.insertLast(x);
     }
 
     // Lay va xoa phan tu dau Queue
     int dequeue() {
-        if (n == 0) {
+        if (isEmpty()) {
             cout << "Queue rong!" << endl;
             return -1;
         }
 
-        int x = arr[0];
-        deleteFirst();
+        int x = list.getValue(0);
+        list.deleteFirst();
         return x;
     }
 
     // Xem phan tu dau Queue
     int front() {
-        if (n == 0) {
+        if (isEmpty()) {
             cout << "Queue rong!" << endl;
             return -1;
         }
 
-        return arr[0];
+        return list.getValue(0);
     }
 
     // Kiem tra Queue rong
     bool isEmpty() {
-        return n == 0;
+        return list.n == 0;
     }
 
     // Tra ve so phan tu
     int size() {
-        return n;
+        return list.n;
     }
 
     // In Queue
     void print() {
-        printForward();
+        list.printForward();
     }
 };
 
