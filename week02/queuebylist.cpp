@@ -2,7 +2,7 @@
 #define QUEUEBYLIST_H
 
 #define LIST_ARRAY_NO_MAIN
-#include "list_array.cpp"
+#include "list_array.h"
 
 struct Queue {
     List list; // Moi Queue so huu 1 List rieng biet
