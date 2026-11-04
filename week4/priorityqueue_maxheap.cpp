@@ -78,6 +78,7 @@ int delMax(PriorityQueue& q) {
     return max_val;
 }
 
+#ifndef PRIORITYQUEUE_NO_MAIN
 int main() {
     PriorityQueue q;
     initQueue(q);
@@ -88,11 +89,11 @@ int main() {
     insert(q, 35);
     insert(q, 5);
 
-    cout << "Cac phan tu lay ra (tu lon nhat den be nhat): ";
+    cout << "Cac phan tu lay ra: ";
     while (!isEmpty(q)) {
         cout << delMax(q) << " ";
     }
-    cout << endl; // Kết quả: 45 35 25 15 5
 
     return 0;
 }
+#endif
