@@ -43,7 +43,7 @@ void insertionSort(int arr[], int n)
     for (int i = 1; i < n; ++i) {
         int key = arr[i];
         int j = i - 1;
-
+// coi phan tu dau tien da duoc sap xep sau do cho con tiep theo di tim dung vi tri cua no
         while (j >= 0 && arr[j] > key) {
             arr[j + 1] = arr[j];
             j = j - 1;
@@ -106,7 +106,7 @@ int partition(int array[], int low, int high)
 {
     int pivot = array[high];
     int i = low - 1;
-
+//đưa ptu nho hơn về đầu mảng
     for (int j = low; j <= high - 1; j++) {
         if (array[j] < pivot) {
             i = i + 1;
